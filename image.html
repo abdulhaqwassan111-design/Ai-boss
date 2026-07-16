@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Image - AI Boss</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+    <h1>🖼️ AI Image</h1>
+    <p>Create AI Images (API coming soon)</p>
+</header>
+
+<div class="container">
+    <div class="card">
+        <h2>Image Generator</h2>
+
+        <textarea id="imagePrompt"
+        placeholder="Describe the image you want..."
+        style="width:100%;height:150px;background:#0d1117;color:white;border:1px solid #30363d;border-radius:10px;padding:10px;"></textarea>
+
+        <br><br>
+
+        <button onclick="generateImage()"
+        style="padding:12px 25px;background:#00d4ff;color:black;border:none;border-radius:10px;font-weight:bold;cursor:pointer;">
+            Generate Image
+        </button>
+
+        <br><br>
+
+        <div id="result">🖼️ Your generated image will appear here after API integration.</div>
+    </div>
+</div>
+
+<script>
+function generateImage() {
+    let prompt = document.getElementById("imagePrompt").value.trim();
+
+    if (prompt === "") {
+        document.getElementById("result").innerHTML = "⚠️ Please enter an image description.";
+        return;
+    }
+
+    document.getElementById("result").innerHTML =
+    "🎨 Image generation is coming soon. API will be connected later.";
+}
+</script>
+
+</body>
+</html>

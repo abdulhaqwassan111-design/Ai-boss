@@ -1,48 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>AI Boss</title>
+
+<link rel="stylesheet" href="style.css">
+
 <style>
-body{margin:0;font-family:Arial,sans-serif;background:#f5f5f5;text-align:center;}
-header{background:#007bff;color:white;padding:20px;}
-.container{padding:20px;}
-.card{background:white;margin:20px auto;max-width:350px;padding:20px;border-radius:10px;box-shadow:0 0 10px rgba(0,0,0,.2);}
-button{background:#007bff;color:white;border:none;padding:10px 20px;border-radius:6px;cursor:pointer;font-size:16px;}
-footer{background:#222;color:white;padding:15px;margin-top:30px;}
+
+.logo{
+font-size:70px;
+margin-top:20px;
+}
+
+h1{
+font-size:45px;
+color:#00d4ff;
+}
+
+p{
+color:#bbb;
+margin:15px;
+}
+
+.card{
+max-width:400px;
+margin:30px auto;
+background:#1a1a1a;
+padding:20px;
+border-radius:15px;
+}
+
+.btn{
+display:block;
+padding:15px;
+margin:15px 0;
+background:#00d4ff;
+color:black;
+text-decoration:none;
+border-radius:12px;
+font-weight:bold;
+font-size:18px;
+transition:0.3s;
+}
+
+.btn:hover{
+transform:scale(1.05);
+background:#00ff99;
+}
+
 </style>
+  .logo{
+font-size:80px;
+animation:float 2s infinite alternate;
+}
+
+@keyframes float{
+from{
+transform:translateY(0px);
+}
+
+to{
+transform:translateY(-15px);
+}
+}
+
 </head>
+
+
 <body>
-<header>
-<h1>🤖 AI Boss</h1>
-<p>Welcome to AI Boss Website</p>
-</header>
-<div class="container">
+
+
+<div class="logo">🤖</div>
+
+<h1>AI Boss</h1>
+
+<p>Your AI World</p>
+
+
 <div class="card">
-<h2>AI Chat</h2>
-<p>Ask anything with AI.</p>
-<button onclick="openTool('AI Chat')">Open</button>
+
+<a class="btn" href="chat.html">💬 AI Chat</a>
+
+<a class="btn" href="image.html">🖼️ AI Image</a>
+
+<a class="btn" href="video.html">🎥 AI Video</a>
+
+<a class="btn" href="voice.html">🎙️ AI Voice</a>
+
+<a class="btn" href="profile.html">👤 Profile</a>
+
+<a class="btn" href="settings.html">⚙️ Settings</a>
+
+<a class="btn" href="login.html">🔐 Login</a>
+
+<a class="btn" href="signup.html">📝 Sign Up</a>
+
+
 </div>
-<div class="card">
-<h2>AI Image Generator</h2>
-<p>Create amazing AI images.</p>
-<button onclick="openTool('AI Image Generator')">Open</button>
-</div>
-<div class="card">
-<h2>Voice Over</h2>
-<p>Create AI voices instantly.</p>
-<button onclick="openTool('Voice Over')">Open</button>
-</div>
-<div class="card">
-<h2>PDF Tools</h2>
-<p>Merge, Split and Convert PDFs.</p>
-<button onclick="openTool('PDF Tools')">Open</button>
-</div>
-</div>
-<footer>© 2026 AI Boss</footer>
-<script>
-function openTool(name){alert(name + " is coming soon!");}
-</script>
+<footer style="margin-top:40px;color:#aaa;">
+<p>🤖 AI Boss © 2026</p>
+<p>Created by Abdul Haq</p>
+</footer>
+
 </body>
+<nav class="navbar">
+<a href="index.html">🏠 Home</a>
+<a href="chat.html">💬 Chat</a>
+<a href="image.html">🖼️ Image</a>
+<a href="video.html">🎥 Video</a>
+<a href="voice.html">🎙️ Voice</a>
+<a href="profile.html">👤 Profile</a>
+</nav>
 </html>

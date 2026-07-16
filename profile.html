@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Profile - AI Boss</title>
+
+<style>
+body{
+    background:#0b0b0b;
+    color:white;
+    font-family:Arial;
+    text-align:center;
+}
+
+.card{
+    background:#1a1a1a;
+    width:85%;
+    max-width:400px;
+    margin:40px auto;
+    padding:20px;
+    border-radius:15px;
+}
+
+.btn{
+    display:block;
+    padding:12px;
+    margin:15px 0;
+    background:#00ff99;
+    color:black;
+    border-radius:10px;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+img{
+    width:120px;
+    height:120px;
+    border-radius:50%;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="card">
+
+<h2>👤 My Profile</h2>
+
+<img src="https://via.placeholder.com/120">
+
+<p id="name"><b>Name:</b> </p>
+<p id="email"><b>Email:</b> </p>
+<p><b>Plan:</b> Free</p>
+  <button onclick="editProfile()" 
+style="width:100%;padding:12px;margin-top:15px;background:#00d4ff;color:black;border:none;border-radius:10px;font-weight:bold;">
+✏️ Edit Profile
+</button>
+
+<p id="msg"></p>
+
+<a class="btn" href="./settings.html">⚙️ Settings</a>
+
+<a class="btn" href="login.html">🔐 Login</a>
+
+<a class="btn" href="signup.html">📝 Sign Up</a>
+
+<a class="btn" href="index.html">🏠 Home</a>
+
+</div>
+  <script><script>
+function editProfile(){
+
+let name = prompt("Apna naam likho:");
+
+if(name){
+document.querySelector("p").innerHTML="<b>Name:</b> " + name;
+document.getElementById("msg").innerHTML="✅ Profile updated";
+}
+
+}
+</script>
+  <script>
+function editProfile(){
+
+let name = prompt("Apna naam likho:");
+
+if(name){
+document.querySelector("p").innerHTML="<b>Name:</b> " + name;
+document.getElementById("msg").innerHTML="✅ Profile updated";
+}
+
+}
+  </script>
+
+  </script>
+  <script>
+
+let username = localStorage.getItem("username");
+let useremail = localStorage.getItem("useremail");
+
+if(username){
+document.getElementById("name").innerHTML =
+"<b>Name:</b> " + username;
+}
+
+if(useremail){
+document.getElementById("email").innerHTML =
+"<b>Email:</b> " + useremail;
+}
+
+  </script>
+
+</body>
+</html>
+<script>
+function logout(){
+
+localStorage.removeItem("username");
+localStorage.removeItem("useremail");
+
+window.location.href="login.html";
+
+}
+</script>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Boss Story</title>
+<style>
+body{
+background:#111;
+color:white;
+font-family:Arial;
+text-align:center;
+padding:20px;
+}
+h1{
+color:#00bcd4;
+}
+textarea{
+width:90%;
+height:120px;
+padding:10px;
+border-radius:10px;
+font-size:16px;
+}
+button{
+width:90%;
+padding:15px;
+margin-top:10px;
+background:#00bcd4;
+color:white;
+border:none;
+border-radius:10px;
+font-size:18px;
+}
+#result{
+margin-top:20px;
+background:#222;
+padding:15px;
+border-radius:10px;
+}
+</style>
+</head>
+<body>
+
+<h1>✍️ AI Story Generator</h1>
+
+<textarea id="topic" placeholder="کہانی کا موضوع لکھیں..."></textarea>
+
+<button onclick="story()">Generate Story</button>
+
+<div id="result">یہاں کہانی نظر آئے گی۔</div>
+
+<script>
+function story(){
+let topic=document.getElementById("topic").value;
+
+if(topic==""){
+document.getElementById("result").innerHTML="براہ کرم موضوع لکھیں۔";
+}else{
+document.getElementById("result").innerHTML="<b>موضوع:</b> "+topic+"<br><br>یہ ابھی ڈیمو ہے۔ بعد میں اصل AI اس موضوع پر مکمل کہانی لکھے گا۔";
+}
+}
+</script>
+
+</body>
+</html>

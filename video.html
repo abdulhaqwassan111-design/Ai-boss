@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Video - AI Boss</title>
+
+<style>
+body{
+margin:0;
+font-family:Arial;
+background:#0b0b0b;
+color:white;
+text-align:center;
+}
+
+h1{
+color:#00e5ff;
+margin-top:20px;
+}
+
+input{
+width:85%;
+padding:15px;
+border:none;
+border-radius:10px;
+margin-top:20px;
+font-size:16px;
+}
+
+button{
+margin-top:15px;
+padding:15px 25px;
+background:#0066ff;
+color:white;
+border:none;
+border-radius:10px;
+font-size:18px;
+}
+
+#result{
+margin:30px;
+padding:20px;
+background:#1c1c1c;
+border-radius:15px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>🎬 AI Video</h1>
+
+<input id="prompt" placeholder="Video ka prompt likhen">
+
+<br>
+
+<button onclick="generateVideo()">Generate Video</button>
+
+<div id="result">
+Video yahan show hogi.
+</div>
+
+<script>
+function generateVideo(){
+let prompt=document.getElementById("prompt").value;
+
+if(prompt==""){
+alert("Prompt likhen");
+return;
+}
+
+document.getElementById("result").innerHTML =
+"<h3>Prompt:</h3>" + prompt +
+"<br><br>🎬 Video API baad mein connect hogi.";
+}
+</script>
+
+</body>
+</html>

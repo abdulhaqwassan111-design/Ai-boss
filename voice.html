@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Voice - AI Boss</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+    <h1>🎙️ AI Voice</h1>
+    <p>Create AI Voice (API coming soon)</p>
+</header>
+
+<div class="container">
+    <div class="card">
+
+        <h2>Voice Generator</h2>
+
+        <textarea id="voicePrompt"
+        placeholder="Type the text you want to convert into voice..."
+        style="width:100%;height:150px;background:#0d1117;color:white;border:1px solid #30363d;border-radius:10px;padding:10px;"></textarea>
+
+        <br><br>
+
+        <button onclick="generateVoice()"
+        style="padding:12px 25px;background:#00d4ff;color:black;border:none;border-radius:10px;font-weight:bold;cursor:pointer;">
+            Generate Voice
+        </button>
+
+        <br><br>
+
+        <div id="voiceResult">
+            🎙️ Your AI voice will appear here after API integration.
+        </div>
+
+    </div>
+</div>
+
+<script>
+function generateVoice() {
+    let prompt = document.getElementById("voicePrompt").value.trim();
+
+    if (prompt === "") {
+        document.getElementById("voiceResult").innerHTML =
+        "⚠️ Please enter some text.";
+        return;
+    }
+
+    document.getElementById("voiceResult").innerHTML =
+    "🔊 AI Voice is coming soon. API will be connected later.";
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AI Chat - AI Boss</title>
+
+<style>
+
+body{
+background:#0b0b0b;
+color:white;
+font-family:Arial;
+text-align:center;
+padding:20px;
+}
+
+.navbar{
+margin-bottom:20px;
+}
+
+.navbar a{
+color:white;
+text-decoration:none;
+margin:5px;
+}
+
+.chatbox{
+background:#1a1a1a;
+max-width:400px;
+margin:auto;
+padding:20px;
+border-radius:15px;
+}
+
+#messages{
+height:300px;
+overflow:auto;
+background:#111;
+padding:10px;
+border-radius:10px;
+text-align:left;
+}
+
+input{
+width:65%;
+padding:12px;
+border-radius:10px;
+border:none;
+}
+
+button{
+padding:12px;
+background:#00d4ff;
+border:none;
+border-radius:10px;
+font-weight:bold;
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+<nav class="navbar">
+<a href="index.html">🏠 Home</a>
+<a href="profile.html">👤 Profile</a>
+</nav>
+
+
+<div class="chatbox">
+
+<h2>💬 AI Boss Chat</h2>
+
+<div id="messages">
+<p>🤖 AI: Hello! Main AI Boss hoon. Kaise help kar sakta hoon?</p>
+</div>
+
+<br>
+
+<input id="text" placeholder="Type message">
+
+<button onclick="send()">Send</button>
+
+</div>
+
+
+<script>
+
+function send()
+  async function send(){
+
+let text=document.getElementById("text").value;
+
+if(text=="") return;
+
+let box=document.getElementById("messages");
+
+box.innerHTML += "<p>👤 You: "+text+"</p>";
+
+let response = await fetch("http://localhost:3000/chat",{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify({
+message:text
+})
+});
+
+let data = await response.json();
+
+box.innerHTML += "<p>🤖 AI: "+data.reply+"</p>";
+
+document.getElementById("text").value="";
+
+  }
+
+</script>
+
+
+</body>
+</html>
