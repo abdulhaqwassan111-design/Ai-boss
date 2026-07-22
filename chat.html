@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
 
 <meta charset="UTF-8">
@@ -13,115 +14,459 @@ body{
 background:#0b0b0b;
 color:white;
 font-family:Arial;
-text-align:center;
+margin:0;
 padding:20px;
 }
 
-.navbar{
-margin-bottom:20px;
+.sidebar{
+
+position:fixed;
+left:0;
+top:0;
+width:180px;
+height:100%;
+background:#111;
+padding:15px;
+
 }
 
-.navbar a{
-color:white;
-text-decoration:none;
-margin:5px;
+.sidebar button{
+
+width:100%;
+margin:8px 0;
+padding:10px;
+border-radius:8px;
+border:none;
+background:#00d4ff;
+font-weight:bold;
+
 }
+
+
+.main{
+
+margin-left:210px;
+
+}
+
 
 .chatbox{
-background:#1a1a1a;
-max-width:400px;
+
+max-width:500px;
 margin:auto;
+background:#1a1a1a;
 padding:20px;
 border-radius:15px;
+
 }
 
+
 #messages{
-height:300px;
+
+height:350px;
 overflow:auto;
 background:#111;
 padding:10px;
 border-radius:10px;
 text-align:left;
+
 }
+
 
 input{
-width:65%;
+
+width:70%;
 padding:12px;
 border-radius:10px;
 border:none;
+
 }
 
+
 button{
+
 padding:12px;
-background:#00d4ff;
-border:none;
 border-radius:10px;
+border:none;
 font-weight:bold;
+
 }
+
+
+.send{
+
+background:#00d4ff;
+
+}
+
+
+.voice{
+
+margin-top:10px;
+background:#00ff99;
+
+}
+
 
 </style>
 
 </head>
 
+
 <body>
 
 
-<nav class="navbar">
-<a href="index.html">🏠 Home</a>
-<a href="profile.html">👤 Profile</a>
-</nav>
+<div class="sidebar">
+
+<h2>🤖 AI Boss</h2>
+
+<button onclick="newChat()">
+🆕 New Chat
+</button>
+
+
+<button onclick="clearChat()">
+🗑️ Clear
+</button>
+
+
+<h3>History</h3>
+
+<div id="history"></div>
+
+
+</div>
+
+
+
+<div class="main">
 
 
 <div class="chatbox">
 
+
 <h2>💬 AI Boss Chat</h2>
 
+
 <div id="messages">
+
 <p>🤖 AI: Hello! Main AI Boss hoon. Kaise help kar sakta hoon?</p>
+
 </div>
+
 
 <br>
 
+
 <input id="text" placeholder="Type message">
 
-<button onclick="send()">Send</button>
+
+<button class="send" onclick="send()">
+Send
+</button>
+
+
+<br>
+
+
+<button class="voice" onclick="startVoice()">
+🎤 Speak
+</button>
+
+
+<button class="voice" onclick="speakReply()">
+🔊 Listen
+</button>
+
 
 </div>
+
+
+</div>
+
 
 
 <script>
 
-async function send() {
 
-let text=document.getElementById("text").value;
+let lastReply="";
+
+
+
+// Send Message
+
+async function send(){
+
+
+let input=document.getElementById("text");
+
+let text=input.value;
+
 
 if(text=="") return;
 
+
 let box=document.getElementById("messages");
 
-box.innerHTML += "<p>👤 You: "+text+"</p>";
 
-let response = await 
-  fetch("/api/chat", {
+box.innerHTML += 
+"<p>👤 You: "+text+"</p>";
+
+
+
+let language =
+localStorage.getItem("AI_Boss_Language") || "English";
+
+
+
+try{
+
+
+let response = await fetch("/api/chat",{
+
 method:"POST",
+
 headers:{
+
 "Content-Type":"application/json"
+
 },
+
+
 body:JSON.stringify({
-message:text
+
+message:text,
+
+language:language
+
 })
+
+
 });
 
-let data = await response.json();
 
-box.innerHTML += "<p>🤖 AI: "+data.reply+"</p>";
 
-document.getElementById("text").value="";
+let data=await response.json();
 
-  }
+
+
+lastReply=data.reply;
+
+
+
+box.innerHTML +=
+"<p>🤖 AI: "+data.reply+"</p>";
+
+
+
+saveChat();
+
+
+
+}
+
+catch(error){
+
+
+box.innerHTML +=
+"<p>❌ Server Error</p>";
+
+}
+
+
+
+input.value="";
+
+
+}
+
+
+
+
+// Voice Input
+
+function startVoice(){
+
+
+const SpeechRecognition =
+window.SpeechRecognition ||
+window.webkitSpeechRecognition;
+
+
+
+if(!SpeechRecognition){
+
+alert("Voice not supported");
+
+return;
+
+}
+
+
+
+let recognition=new SpeechRecognition();
+
+
+recognition.lang="en-US";
+
+
+recognition.start();
+
+
+
+recognition.onresult=function(event){
+
+
+document.getElementById("text").value =
+event.results[0][0].transcript;
+
+
+};
+
+
+
+}
+
+
+
+// Voice Output
+
+function speakReply(){
+
+
+if(!lastReply){
+
+alert("No AI reply");
+
+return;
+
+}
+
+
+let speech =
+new SpeechSynthesisUtterance(lastReply);
+
+
+speech.lang="en-US";
+
+
+window.speechSynthesis.speak(speech);
+
+
+}
+
+
+
+
+// Save Chat
+
+function saveChat(){
+
+
+localStorage.setItem(
+
+"AI_Boss_Chat",
+
+document.getElementById("messages").innerHTML
+
+);
+
+
+showHistory();
+
+}
+
+
+
+// Load Chat
+
+function loadChat(){
+
+
+let old =
+localStorage.getItem("AI_Boss_Chat");
+
+
+if(old){
+
+document.getElementById("messages").innerHTML=old;
+
+}
+
+
+}
+
+
+
+
+function showHistory(){
+
+
+let old =
+localStorage.getItem("AI_Boss_Chat");
+
+
+if(old){
+
+document.getElementById("history").innerHTML=
+"✅ Previous Chat Saved";
+
+}
+
+
+}
+
+
+
+// New Chat
+
+function newChat(){
+
+
+document.getElementById("messages").innerHTML="";
+
+
+localStorage.removeItem("AI_Boss_Chat");
+
+
+showHistory();
+
+
+}
+
+
+
+
+// Clear
+
+function clearChat(){
+
+
+localStorage.removeItem("AI_Boss_Chat");
+
+
+document.getElementById("messages").innerHTML="";
+
+
+alert("Chat Cleared");
+
+
+}
+
+
+
+window.onload=function(){
+
+loadChat();
+
+showHistory();
+
+};
+
 
 </script>
 
 
 </body>
+
 </html>
