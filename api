@@ -17,9 +17,10 @@ const { message, language } = req.body;
         model: "gpt-4.1-mini",
         messages: [
           {
-            role: "system",
-            content: "You are AI Boss, a helpful AI assistant."
-          },
+          {
+  role: "system",
+  content: `You are AI Boss. Reply in ${language || "English"} language.`
+}
           {
             role: "user",
             content: message
