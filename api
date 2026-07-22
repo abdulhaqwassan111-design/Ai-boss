@@ -36,8 +36,7 @@ const { message, language } = req.body;
     });
 
   } catch (error) {
-    res.status(500).json({
-      reply: "Server Error"
-    });
-  }
+  res.status(500).json({
+    reply: error.message
+  });
 }
