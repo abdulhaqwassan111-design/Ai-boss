@@ -1,0 +1,54 @@
+index.html<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Boss</title>
+<style>
+body{
+  margin:0;
+  font-family:Arial;
+  background:#111;
+  color:white;
+  text-align:center;
+}
+header{
+  padding:30px;
+  background:#0066ff;
+}
+button{
+  padding:12px 25px;
+  margin:10px;
+  border:none;
+  border-radius:10px;
+  background:#00cc66;
+  color:white;
+  font-size:18px;
+}
+.box{
+  margin:20px;
+  padding:20px;
+  background:#222;
+  border-radius:15px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>AI Boss</h1>
+<p>Welcome to AI Tools World</p>
+</header>
+
+<div class="box">
+<h2>AI Tools</h2>
+<p>Future technology at your fingertips</p>
+
+<button>AI Chat</button>
+<button>AI Image</button>
+<button>AI Video</button>
+</div>
+
+</body>
+</html>

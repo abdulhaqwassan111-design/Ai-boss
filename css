@@ -1,0 +1,44 @@
+style.cssbody{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#111;
+    color:white;
+    text-align:center;
+}
+
+header{
+    background:#00bcd4;
+    padding:20px;
+    font-size:30px;
+    font-weight:bold;
+}
+
+.btn{
+    display:block;
+    width:220px;
+    margin:15px auto;
+    padding:15px;
+    background:#00bcd4;
+    color:white;
+    text-decoration:none;
+    border-radius:10px;
+    font-size:18px;
+}
+
+.btn:hover{
+    background:#0097a7;
+}.light{
+  background:#ffffff;
+  color:#000000;
+}
+
+.theme-btn{
+  position:fixed;
+  top:15px;
+  right:15px;
+  background:#00bcd4;
+  color:white;
+  border:none;
+  padding:10px;
+  border-radius:8px;
+}

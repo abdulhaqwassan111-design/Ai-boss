@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -7,61 +7,266 @@
 
 <style>
 body{
-    margin:0;
     background:#0b0b0b;
     color:white;
-    font-family:Arial,sans-serif;
+    font-family:Arial;
     text-align:center;
-    transition:0.3s;
 }
 
 .card{
     background:#1a1a1a;
-    width:90%;
+    width:85%;
     max-width:400px;
-    margin:40px auto;
+    margin:50px auto;
     padding:20px;
     border-radius:15px;
-    transition:0.3s;
-}
-
-h1{
-    margin-bottom:20px;
-}
-
-button,.btn{
-    width:100%;
-    padding:15px;
-    margin:12px 0;
-    border:none;
-    border-radius:10px;
-    font-size:18px;
-    cursor:pointer;
-}
-
-button{
-    background:#007bff;
-    color:white;
 }
 
 .btn{
     display:block;
+    padding:12px;
+    margin:15px 0;
     background:#00ff99;
     color:black;
     text-decoration:none;
+    border-radius:10px;
     font-weight:bold;
-    box-sizing:border-box;
+}
+
+button{
+    width:100%;
+    padding:12px;
+    margin:10px 0;
+    border:none;
+    border-radius:10px;
+    background:#007bff;
+    color:white;
 }
 </style>
+
 </head>
 
 <body>
+<button onclick="toggleDarkMode()">🌙 Dark Mode</button>
 
-<div class="card" id="card">
+<button onclick="toggleNotifications()">🔔 Notifications</button>
 
-<h1>⚙️ Settings</h1>
+<button onclick="changeLanguage()">🌐 Language</button>
 
-<button onclick="toggleTheme()">🌙 Dark / Light Mode</button>
+<button onclick="voiceSettings()">🎤 Voice Settings</button>
 
-<button onclick="alert('Notifications feature will be added soon.')">
-    
+<button onclick="clearChat()">🗑️ Clear Chat</button>
+
+<button onclick="selectModel()">🤖 AI Model</button>
+
+<button onclick="myAccount()">👤 My Account</button>
+<button onclick="window.location.href='support.html'">
+❓ Help & Support
+</button>
+
+<button onclick="window.location.href='terms.html'">
+📜 Terms & Conditions
+</button>
+
+<button onclick="helpSupport()">❓ Help & Support</button>
+
+<button onclick="rateApp()">⭐ Rate AI Boss</button>
+
+<button onclick="window.location.href='about.html'">
+ℹ️ About AI Boss
+</button>
+
+<button onclick="logout()">🚪 Logout</button>
+
+<a class="btn" href="profile.html">⬅️ Back to Profile</a>
+  <script>
+function rateApp(){
+    alert("Thank you for using AI Boss!\n\nAI Boss Play Store پر آنے کے بعد آپ یہاں سے ریٹنگ دے سکیں گے۔");
+}
+  </script>
+  <script>
+function logout() {
+    if (confirm("Are you sure you want to logout?")) {
+        localStorage.clear();
+        window.location.href = "login.html";
+    }
+}
+  </script>
+  function toggleDarkMode(){
+
+document.body.style.background =
+document.body.style.background=="white"
+? "#0b0b0b"
+: "white";
+
+document.body.style.color =
+document.body.style.color=="black"
+? "white"
+: "black";
+
+}
+
+
+function toggleNotifications(){
+
+alert("🔔 Notifications Enabled");
+
+}
+
+
+function voiceSettings(){
+
+alert("🎤 Voice Settings Opened");
+
+}
+
+
+function clearChat(){
+
+localStorage.removeItem("AI_Boss_Chat");
+
+alert("🗑️ Chat History Cleared");
+
+}
+
+
+function selectModel(){
+
+let model = prompt(
+"Select AI Model:\n1. GPT-4.1 Mini\n2. GPT-4"
+);
+
+localStorage.setItem("AI_Model",model);
+
+alert("AI Model Saved");
+
+}
+
+
+function myAccount(){
+
+window.location.href="profile.html";
+
+}
+
+
+function openLanguage(){
+
+let box=document.getElementById("languageBox");
+
+box.style.display =
+box.style.display=="block"
+? "none"
+: "block";
+
+}
+  <button onclick="openLanguage()">🌐 Language</button>
+
+<div id="languageBox" style="display:none;">
+  <h3>Select Language</h3>
+
+  <input 
+    type="text" 
+    id="searchLang" 
+    placeholder="Search language..."
+    onkeyup="filterLanguage()"
+  >
+
+  <select id="languageList" size="8" onchange="changeLanguage()">
+    <option>English</option>
+    <option>Urdu</option>
+    <option>Hindi</option>
+    <option>Sindhi</option>
+    <option>Arabic</option>
+    <option>Chinese</option>
+    <option>Japanese</option>
+    <option>Korean</option>
+    <option>French</option>
+    <option>Spanish</option>
+    <option>German</option>
+    <option>Italian</option>
+    <option>Russian</option>
+    <option>Portuguese</option>
+    <option>Turkish</option>
+    <option>Bengali</option>
+    <option>Punjabi</option>
+    <option>Tamil</option>
+    <option>Telugu</option>
+    <option>Marathi</option>
+  </select>
+</div>
+  </>
+  function openLanguage(){
+  let box = document.getElementById("languageBox");
+
+  if(box.style.display === "none"){
+    box.style.display="block";
+  }else{
+    box.style.display="none";
+  }
+}
+
+
+function changeLanguage(){
+
+let lang = document.getElementById("languageList").value;
+
+localStorage.setItem("AI_Boss_Language",lang);
+
+alert("Language changed to: " + lang);
+
+}
+
+
+function filterLanguage(){
+
+let input = document.getElementById("searchLang").value.toLowerCase();
+
+let select = document.getElementById("languageList");
+
+let options = select.options;
+
+
+for(let i=0;i<options.length;i++){
+
+let text = options[i].text.toLowerCase();
+
+options[i].style.display =
+text.includes(input) ? "" : "none";
+
+}
+
+}
+</body>
+  <script>
+
+function myAccount(){
+alert("My Account OK");
+}
+
+function selectModel(){
+alert("AI Model OK");
+}
+
+function clearChat(){
+alert("Clear Chat OK");
+}
+
+function voiceSettings(){
+alert("Voice OK");
+}
+
+function toggleNotifications(){
+alert("Notification OK");
+}
+
+function toggleDarkMode(){
+alert("Dark Mode OK");
+}
+
+function openLanguage(){
+alert("Language OK");
+}
+
+  </script>
+</html>

@@ -1,126 +1,138 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Profile - AI Boss</title>
+
+<title>AI Boss Profile</title>
 
 <style>
+
 body{
-    background:#0b0b0b;
-    color:white;
-    font-family:Arial;
-    text-align:center;
+background:#0b0b0b;
+color:white;
+font-family:Arial;
+text-align:center;
 }
 
 .card{
-    background:#1a1a1a;
-    width:85%;
-    max-width:400px;
-    margin:40px auto;
-    padding:20px;
-    border-radius:15px;
-}
-
-.btn{
-    display:block;
-    padding:12px;
-    margin:15px 0;
-    background:#00ff99;
-    color:black;
-    border-radius:10px;
-    text-decoration:none;
-    font-weight:bold;
+background:#1a1a1a;
+width:85%;
+max-width:400px;
+margin:40px auto;
+padding:20px;
+border-radius:15px;
 }
 
 img{
-    width:120px;
-    height:120px;
-    border-radius:50%;
+width:100px;
+height:100px;
+border-radius:50%;
 }
+
+input{
+width:90%;
+padding:10px;
+margin:10px;
+border-radius:8px;
+}
+
+button{
+width:90%;
+padding:12px;
+margin:10px;
+border:none;
+border-radius:10px;
+background:#007bff;
+color:white;
+font-weight:bold;
+}
+
 </style>
 
 </head>
 
 <body>
 
+
 <div class="card">
 
-<h2>👤 My Profile</h2>
+<h2>👤 AI Boss Profile</h2>
 
-<img src="https://via.placeholder.com/120">
 
-<p id="name"><b>Name:</b> </p>
-<p id="email"><b>Email:</b> </p>
-<p><b>Plan:</b> Free</p>
-  <button onclick="editProfile()" 
-style="width:100%;padding:12px;margin-top:15px;background:#00d4ff;color:black;border:none;border-radius:10px;font-weight:bold;">
-✏️ Edit Profile
+<img id="profileImg" src="https://via.placeholder.com/100">
+
+
+<input id="name" placeholder="Your Name">
+
+<input id="email" placeholder="Email">
+
+
+<button onclick="saveProfile()">
+💾 Save Profile
 </button>
 
-<p id="msg"></p>
 
-<a class="btn" href="./settings.html">⚙️ Settings</a>
+<button onclick="logout()">
+🚪 Logout
+</button>
 
-<a class="btn" href="login.html">🔐 Login</a>
 
-<a class="btn" href="signup.html">📝 Sign Up</a>
+<a href="settings.html">
+⬅️ Back Settings
+</a>
 
-<a class="btn" href="index.html">🏠 Home</a>
 
 </div>
-  <script><script>
-function editProfile(){
 
-let name = prompt("Apna naam likho:");
 
-if(name){
-document.querySelector("p").innerHTML="<b>Name:</b> " + name;
-document.getElementById("msg").innerHTML="✅ Profile updated";
-}
 
-}
-</script>
-  <script>
-function editProfile(){
-
-let name = prompt("Apna naam likho:");
-
-if(name){
-document.querySelector("p").innerHTML="<b>Name:</b> " + name;
-document.getElementById("msg").innerHTML="✅ Profile updated";
-}
-
-}
-  </script>
-
-  </script>
-  <script>
-
-let username = localStorage.getItem("username");
-let useremail = localStorage.getItem("useremail");
-
-if(username){
-document.getElementById("name").innerHTML =
-"<b>Name:</b> " + username;
-}
-
-if(useremail){
-document.getElementById("email").innerHTML =
-"<b>Email:</b> " + useremail;
-}
-
-  </script>
-
-</body>
-</html>
 <script>
+
+
+function saveProfile(){
+
+let name =
+document.getElementById("name").value;
+
+let email =
+document.getElementById("email").value;
+
+
+localStorage.setItem("AI_Name",name);
+
+localStorage.setItem("AI_Email",email);
+
+
+alert("Profile Saved ✅");
+
+}
+
+
+
+function loadProfile(){
+
+document.getElementById("name").value =
+localStorage.getItem("AI_Name") || "";
+
+document.getElementById("email").value =
+localStorage.getItem("AI_Email") || "";
+
+}
+
+
 function logout(){
 
-localStorage.removeItem("username");
-localStorage.removeItem("useremail");
+localStorage.clear();
 
 window.location.href="login.html";
 
 }
+
+
+window.onload=loadProfile;
+
+
 </script>
+
+
+</body>
+</html>
