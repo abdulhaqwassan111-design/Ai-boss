@@ -44,6 +44,10 @@ color:#19c2ff;
 margin-bottom:20px;
 }
 
+button{
+cursor:pointer;
+}
+
 .new-chat{
 width:100%;
 padding:14px;
@@ -53,7 +57,6 @@ border:none;
 border-radius:10px;
 font-size:16px;
 font-weight:bold;
-cursor:pointer;
 margin-bottom:20px;
 }
 
@@ -62,8 +65,8 @@ background:#00ff99;
 }
 
 .history-title{
-margin:10px 0;
 color:#aaa;
+margin:10px 0;
 }
 
 .history{
@@ -75,22 +78,14 @@ overflow:auto;
 color:#aaa;
 }
 
-.menu{
-margin-top:20px;
-}
-
 .menu a{
 display:block;
 padding:12px;
-margin-bottom:10px;
+margin-top:10px;
 background:#222;
 border-radius:10px;
-color:#fff;
+color:white;
 text-decoration:none;
-}
-
-.menu a:hover{
-background:#333;
 }
 
 .main{
@@ -107,7 +102,6 @@ display:flex;
 justify-content:space-between;
 align-items:center;
 padding:0 20px;
-border-bottom:1px solid #444;
 }
 
 .messages{
@@ -118,8 +112,20 @@ padding:20px;
 
 .ai-message,
 .user-message{
-margin-bottom:15px;
 display:flex;
+margin-bottom:15px;
+animation:show .3s ease;
+}
+
+@keyframes show{
+from{
+opacity:0;
+transform:translateY(10px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
 }
 
 .avatar{
@@ -132,7 +138,7 @@ background:#444654;
 padding:14px;
 border-radius:12px;
 max-width:80%;
-line-height:1.6;
+line-height:1.5;
 }
 
 .user-message{
@@ -143,8 +149,7 @@ justify-content:flex-end;
 background:#19c2ff;
 color:#000;
 }
-
-.input-area{
+  .input-area{
 display:flex;
 padding:15px;
 background:#202123;
@@ -152,42 +157,62 @@ gap:10px;
 }
 
 .input-area input{
+
 flex:1;
 padding:15px;
 border:none;
 border-radius:10px;
 background:#40414f;
-color:#fff;
+color:white;
 font-size:16px;
 outline:none;
+
 }
+
 
 .send-btn,
 .voice-btn,
 .listen-btn{
+
 width:55px;
 height:55px;
 border:none;
 border-radius:10px;
 background:#19c2ff;
-cursor:pointer;
 font-size:20px;
+
 }
+
 
 .send-btn:hover,
 .voice-btn:hover,
 .listen-btn:hover{
+
 background:#00ff99;
+
 }
+
+
+.typing{
+
+color:#aaa;
+font-style:italic;
+
+}
+
 
 @media(max-width:768px){
 
 .sidebar{
+
 display:none;
+
 }
 
 .main{
+
 width:100%;
+
 }
 
 }
@@ -195,26 +220,35 @@ width:100%;
 </style>
 
 </head>
+
+
 <body>
+
 
 <div class="app">
 
-<!-- Sidebar -->
+
 <div class="sidebar">
 
-<div class="logo">🤖 AI Boss</div>
+<div class="logo">
+🤖 AI Boss
+</div>
+
 
 <button class="new-chat" onclick="newChat()">
 ➕ New Chat
 </button>
 
+
 <div class="history-title">
 History
 </div>
 
+
 <div id="history" class="history">
 No previous chats
 </div>
+
 
 <div class="menu">
 
@@ -222,21 +256,19 @@ No previous chats
 
 <a href="image.html">🖼️ AI Image</a>
 
-<a href="video.html">🎥 AI Video</a>
-
-<a href="voice.html">🎤 AI Voice</a>
-
 <a href="profile.html">👤 Profile</a>
 
 <a href="settings.html">⚙️ Settings</a>
 
 </div>
 
+
 </div>
 
-<!-- Main -->
+
 
 <div class="main">
+
 
 <div class="topbar">
 
@@ -248,57 +280,72 @@ No previous chats
 
 </div>
 
+
+
 <div id="messages" class="messages">
+
 
 <div class="ai-message">
 
-<div class="avatar">🤖</div>
+<div class="avatar">
+🤖
+</div>
 
 <div class="bubble">
 Hello! I'm <b>AI Boss</b>.<br>
-How can I help you today?
+How can I help you?
 </div>
 
 </div>
 
+
 </div>
+
+
 
 <div class="input-area">
 
-<input
-id="text"
-type="text"
+
+<input id="text"
 placeholder="Message AI Boss..."
 onkeydown="if(event.key==='Enter') send();">
+
 
 <button class="send-btn" onclick="send()">
 ➤
 </button>
 
+
 <button class="voice-btn" onclick="startVoice()">
 🎤
 </button>
+
 
 <button class="listen-btn" onclick="speakReply()">
 🔊
 </button>
 
-</div>
 
 </div>
 
+
 </div>
-<script>
 
-let lastReply = "";
 
-const messages = document.getElementById("messages");
+</div>
+  <script>
+
+let lastReply="";
+
+const messages=document.getElementById("messages");
+
 
 function addMessage(text,type){
 
-const div=document.createElement("div");
+let div=document.createElement("div");
 
 div.className=type+"-message";
+
 
 if(type==="ai"){
 
@@ -315,29 +362,46 @@ div.innerHTML=`
 
 }
 
+
 messages.appendChild(div);
 
 messages.scrollTop=messages.scrollHeight;
 
 }
 
+
+
 async function send(){
 
 const input=document.getElementById("text");
 
-const text=input.value.trim();
+let text=input.value.trim();
+
 
 if(text==="") return;
+
 
 addMessage(text,"user");
 
 input.value="";
 
-addMessage("⏳ AI Boss is typing...","ai");
+
+let typing=document.createElement("div");
+
+typing.className="ai-message";
+
+typing.innerHTML=`
+<div class="avatar">🤖</div>
+<div class="bubble typing">
+AI Boss is typing...
+</div>
+`;
+
+messages.appendChild(typing);
+
 
 try{
 
-const language=localStorage.getItem("AI_Boss_Language") || "English";
 
 const response=await fetch("/api/chat",{
 
@@ -349,60 +413,89 @@ headers:{
 
 body:JSON.stringify({
 
-message:text,
-
-language:language
+message:text
 
 })
 
 });
 
+
 const data=await response.json();
 
-messages.removeChild(messages.lastElementChild);
+
+messages.removeChild(typing);
+
 
 lastReply=data.reply || "No response";
 
+
 addMessage(lastReply,"ai");
+
 
 localStorage.setItem(
 "AI_Boss_Chat",
 messages.innerHTML
 );
 
-document.getElementById("history").innerHTML="✅ Previous Chat Saved";
 
-}catch{
+document.getElementById("history").innerHTML=
+"✅ Previous Chat Saved";
 
-messages.removeChild(messages.lastElementChild);
-
-addMessage("❌ Server Error","ai");
 
 }
 
+catch{
+
+
+messages.removeChild(typing);
+
+addMessage(
+"❌ Server Error",
+"ai"
+);
+
 }
+
+
+}
+
+
+
 
 function newChat(){
 
 messages.innerHTML=`
+
 <div class="ai-message">
+
 <div class="avatar">🤖</div>
+
 <div class="bubble">
 Hello! I'm <b>AI Boss</b>.<br>
-How can I help you today?
+How can I help you?
 </div>
+
 </div>
+
 `;
+
 
 localStorage.removeItem("AI_Boss_Chat");
 
-document.getElementById("history").innerHTML="No previous chats";
+document.getElementById("history").innerHTML=
+"No previous chats";
 
 }
 
+
+
+
 function startVoice(){
 
-const SpeechRecognition=window.SpeechRecognition||window.webkitSpeechRecognition;
+const SpeechRecognition=
+window.SpeechRecognition ||
+window.webkitSpeechRecognition;
+
 
 if(!SpeechRecognition){
 
@@ -412,19 +505,26 @@ return;
 
 }
 
+
 const recognition=new SpeechRecognition();
 
 recognition.lang="en-US";
 
 recognition.start();
 
+
 recognition.onresult=function(e){
 
-document.getElementById("text").value=e.results[0][0].transcript;
+document.getElementById("text").value=
+e.results[0][0].transcript;
 
 };
 
+
 }
+
+
+
 
 function speakReply(){
 
@@ -436,7 +536,8 @@ return;
 
 }
 
-const speech=new SpeechSynthesisUtterance(lastReply);
+
+let speech=new SpeechSynthesisUtterance(lastReply);
 
 speech.lang="en-US";
 
@@ -444,21 +545,28 @@ window.speechSynthesis.speak(speech);
 
 }
 
+
+
+
 window.onload=function(){
 
-const old=localStorage.getItem("AI_Boss_Chat");
+let old=localStorage.getItem("AI_Boss_Chat");
+
 
 if(old){
 
 messages.innerHTML=old;
 
-document.getElementById("history").innerHTML="✅ Previous Chat Saved";
+document.getElementById("history").innerHTML=
+"✅ Previous Chat Saved";
 
 }
 
 };
 
+
 </script>
+
 
 </body>
 
