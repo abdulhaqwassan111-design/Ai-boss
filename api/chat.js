@@ -55,12 +55,9 @@ export default async function handler(req, res) {
 
 
     res.status(200).json({
-
-      reply:
-      data.choices?.[0]?.message?.content ||
-      "No reply"
-
-    });
+  reply: data.choices?.[0]?.message?.content,
+  debug: data
+});
 
 
   } catch (error) {
