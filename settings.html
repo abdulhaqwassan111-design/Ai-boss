@@ -1,124 +1,260 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Settings - AI Boss</title>
+
+<title>AI Boss - Settings</title>
 
 <style>
-body{
-    background:#0b0b0b;
-    color:white;
-    font-family:Arial;
-    text-align:center;
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
 }
+
+body{
+background:#0b0b0b;
+color:white;
+transition:.3s;
+}
+
+body.light{
+background:white;
+color:#111;
+}
+
 
 .card{
-    background:#1a1a1a;
-    width:85%;
-    max-width:400px;
-    margin:50px auto;
-    padding:20px;
-    border-radius:15px;
+
+width:90%;
+max-width:420px;
+margin:30px auto;
+padding:20px;
+background:#1a1a1a;
+border-radius:15px;
+box-shadow:0 0 20px rgba(0,212,255,.3);
+
 }
 
-.btn{
-    display:block;
-    padding:12px;
-    margin:15px 0;
-    background:#00ff99;
-    color:black;
-    text-decoration:none;
-    border-radius:10px;
-    font-weight:bold;
+
+body.light .card{
+background:#f3f3f3;
 }
 
-button{
-    width:100%;
-    padding:12px;
-    margin:10px 0;
-    border:none;
-    border-radius:10px;
-    background:#007bff;
-    color:white;
+
+h1{
+
+text-align:center;
+margin-bottom:20px;
+color:#00d4ff;
+
 }
+
+
+button,.btn{
+
+width:100%;
+padding:14px;
+margin:10px 0;
+border:none;
+border-radius:10px;
+background:#00d4ff;
+color:#000;
+font-size:16px;
+font-weight:bold;
+cursor:pointer;
+text-decoration:none;
+display:block;
+text-align:center;
+
+}
+
+
+button:hover,.btn:hover{
+
+background:#00ff99;
+transform:scale(1.03);
+
+}
+
+
+#languageBox{
+
+display:none;
+margin-top:15px;
+
+}
+
+
+#searchLang{
+
+width:100%;
+padding:10px;
+margin-bottom:10px;
+border-radius:8px;
+border:none;
+
+}
+
+
+#languageList{
+
+width:100%;
+height:180px;
+border-radius:8px;
+
+}
+
 </style>
 
 </head>
 
+
 <body>
-<button onclick="toggleDarkMode()">🌙 Dark Mode</button>
 
-<button onclick="toggleNotifications()">🔔 Notifications</button>
 
-<button onclick="changeLanguage()">🌐 Language</button>
+<div class="card">
 
-<button onclick="voiceSettings()">🎤 Voice Settings</button>
 
-<button onclick="clearChat()">🗑️ Clear Chat</button>
+<h1>⚙️ AI Boss Settings</h1>
 
-<button onclick="selectModel()">🤖 AI Model</button>
 
-<button onclick="myAccount()">👤 My Account</button>
-<button onclick="window.location.href='support.html'">
-❓ Help & Support
+<button onclick="toggleDarkMode()">
+🌙 Dark Mode
 </button>
 
-<button onclick="window.location.href='terms.html'">
-📜 Terms & Conditions
+
+<button onclick="toggleNotifications()">
+🔔 Notifications
 </button>
 
-<button onclick="helpSupport()">❓ Help & Support</button>
 
-<button onclick="rateApp()">⭐ Rate AI Boss</button>
-
-<button onclick="window.location.href='about.html'">
-ℹ️ About AI Boss
+<button onclick="selectModel()">
+🤖 AI Model
 </button>
 
-<button onclick="logout()">🚪 Logout</button>
 
-<a class="btn" href="profile.html">⬅️ Back to Profile</a>
-  <script>
-function rateApp(){
-    alert("Thank you for using AI Boss!\n\nAI Boss Play Store پر آنے کے بعد آپ یہاں سے ریٹنگ دے سکیں گے۔");
-}
-  </script>
-  <script>
-function logout() {
-    if (confirm("Are you sure you want to logout?")) {
-        localStorage.clear();
-        window.location.href = "login.html";
-    }
-}
-  </script>
-  function toggleDarkMode(){
+<button onclick="voiceSettings()">
+🎙️ Voice Settings
+</button>
 
-document.body.style.background =
-document.body.style.background=="white"
-? "#0b0b0b"
-: "white";
 
-document.body.style.color =
-document.body.style.color=="black"
-? "white"
-: "black";
+<button onclick="clearChat()">
+🗑️ Clear Chat
+</button>
+<button onclick="showLanguages()">
+🌐 Language
+</button>
+
+
+<div id="languageBox">
+
+
+<input id="searchLang"
+placeholder="Search Language..."
+onkeyup="searchLanguage()">
+
+
+
+<select id="languageList" size="8">
+
+<option>English</option>
+<option>Urdu</option>
+<option>Hindi</option>
+<option>Sindhi</option>
+<option>Arabic</option>
+<option>Chinese</option>
+<option>Spanish</option>
+<option>French</option>
+<option>German</option>
+
+</select>
+
+
+</div>
+
+
+
+<a class="btn" href="profile.html">
+⬅ Back to Profile
+</a>
+
+
+</div>
+<script>
+
+function toggleDarkMode(){
+
+document.body.classList.toggle("light");
 
 }
 
 
 function toggleNotifications(){
 
-alert("🔔 Notifications Enabled");
+let status = localStorage.getItem("AI_Boss_Notifications");
+
+
+if(status === "on"){
+
+localStorage.setItem("AI_Boss_Notifications","off");
+
+alert("🔕 Notifications Off");
 
 }
+
+else{
+
+localStorage.setItem("AI_Boss_Notifications","on");
+
+alert("🔔 Notifications On");
+
+}
+
+}
+
+
+
+function selectModel(){
+
+let model = prompt(
+"Choose AI Model:\n1. GPT-4.1 Mini\n2. GPT-5\n3. AI Boss Basic"
+);
+
+
+if(model){
+
+localStorage.setItem("AI_Model",model);
+
+alert("🤖 AI Model Saved");
+
+}
+
+}
+
 
 
 function voiceSettings(){
 
-alert("🎤 Voice Settings Opened");
+let voice = prompt(
+"Voice Settings:\n1. Male Voice\n2. Female Voice\n3. Default"
+);
+
+
+if(voice){
+
+localStorage.setItem("AI_Voice",voice);
+
+alert("🎙️ Voice Setting Saved");
 
 }
+
+}
+
 
 
 function clearChat(){
@@ -130,143 +266,59 @@ alert("🗑️ Chat History Cleared");
 }
 
 
-function selectModel(){
 
-let model = prompt(
-"Select AI Model:\n1. GPT-4.1 Mini\n2. GPT-4"
-);
 
-localStorage.setItem("AI_Model",model);
+function showLanguages(){
 
-alert("AI Model Saved");
+let box = document.getElementById("languageBox");
+
+
+if(box.style.display === "block"){
+
+box.style.display="none";
+
+}
+
+else{
+
+box.style.display="block";
+
+}
 
 }
 
 
-function myAccount(){
-
-window.location.href="profile.html";
-
-}
 
 
-function openLanguage(){
+function searchLanguage(){
 
-let box=document.getElementById("languageBox");
-
-box.style.display =
-box.style.display=="block"
-? "none"
-: "block";
-
-}
-  <button onclick="openLanguage()">🌐 Language</button>
-
-<div id="languageBox" style="display:none;">
-  <h3>Select Language</h3>
-
-  <input 
-    type="text" 
-    id="searchLang" 
-    placeholder="Search language..."
-    onkeyup="filterLanguage()"
-  >
-
-  <select id="languageList" size="8" onchange="changeLanguage()">
-    <option>English</option>
-    <option>Urdu</option>
-    <option>Hindi</option>
-    <option>Sindhi</option>
-    <option>Arabic</option>
-    <option>Chinese</option>
-    <option>Japanese</option>
-    <option>Korean</option>
-    <option>French</option>
-    <option>Spanish</option>
-    <option>German</option>
-    <option>Italian</option>
-    <option>Russian</option>
-    <option>Portuguese</option>
-    <option>Turkish</option>
-    <option>Bengali</option>
-    <option>Punjabi</option>
-    <option>Tamil</option>
-    <option>Telugu</option>
-    <option>Marathi</option>
-  </select>
-</div>
-  </>
-  function openLanguage(){
-  let box = document.getElementById("languageBox");
-
-  if(box.style.display === "none"){
-    box.style.display="block";
-  }else{
-    box.style.display="none";
-  }
-}
+let input =
+document.getElementById("searchLang").value.toLowerCase();
 
 
-function changeLanguage(){
+let options =
+document.getElementById("languageList").options;
 
-let lang = document.getElementById("languageList").value;
-
-localStorage.setItem("AI_Boss_Language",lang);
-
-alert("Language changed to: " + lang);
-
-}
-
-
-function filterLanguage(){
-
-let input = document.getElementById("searchLang").value.toLowerCase();
-
-let select = document.getElementById("languageList");
-
-let options = select.options;
 
 
 for(let i=0;i<options.length;i++){
 
-let text = options[i].text.toLowerCase();
+let text =
+options[i].text.toLowerCase();
+
 
 options[i].style.display =
 text.includes(input) ? "" : "none";
 
 }
 
+
 }
+
+
+</script>
+
+
 </body>
-  <script>
 
-function myAccount(){
-alert("My Account OK");
-}
-
-function selectModel(){
-alert("AI Model OK");
-}
-
-function clearChat(){
-alert("Clear Chat OK");
-}
-
-function voiceSettings(){
-alert("Voice OK");
-}
-
-function toggleNotifications(){
-alert("Notification OK");
-}
-
-function toggleDarkMode(){
-alert("Dark Mode OK");
-}
-
-function openLanguage(){
-alert("Language OK");
-}
-
-  </script>
 </html>
