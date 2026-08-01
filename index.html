@@ -5,72 +5,65 @@
   <link rel="manifest" href="manifest.json">
   <link rel="icon" href="icon.png">
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>AI Boss</title>
+  <title>AI Boss</title>
 
-<link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css">
 
-<style>
+  <style>
+    .logo{
+      font-size:70px;
+      margin-top:20px;
+    }
 
-.logo{
-font-size:70px;
-margin-top:20px;
-}
+    h1{
+      font-size:45px;
+      color:#00d4ff;
+    }
 
-h1{
-font-size:45px;
-color:#00d4ff;
-}
+    p{
+      color:#bbb;
+      margin:15px;
+    }
 
-p{
-color:#bbb;
-margin:15px;
-}
+    .card{
+      max-width:400px;
+      margin:30px auto;
+      background:#1a1a1a;
+      padding:20px;
+      border-radius:15px;
+    }
 
-.card{
-max-width:400px;
-margin:30px auto;
-background:#1a1a1a;
-padding:20px;
-border-radius:15px;
-}
+    .btn{
+      display:block;
+      padding:15px;
+      margin:15px 0;
+      background:#00d4ff;
+      color:black;
+      text-decoration:none;
+      border-radius:12px;
+      font-weight:bold;
+      font-size:18px;
+      transition:0.3s;
+    }
 
-.btn{
-display:block;
-padding:15px;
-margin:15px 0;
-background:#00d4ff;
-color:black;
-text-decoration:none;
-border-radius:12px;
-font-weight:bold;
-font-size:18px;
-transition:0.3s;
-}
-
-.btn:hover{
-transform:scale(1.05);
-background:#00ff99;
-}
-
-</style>
-
-
+    .btn:hover{
+      transform:scale(1.05);
+      background:#00ff99;
+    }
+  </style>
 
 </head>
 
-
 <body>
-
 
 <div class="logo">🤖</div>
 
 <h1>AI Boss</h1>
 
 <p>Your AI World</p>
-
 
 <div class="card">
 
@@ -90,12 +83,21 @@ background:#00ff99;
 
 <a class="btn" href="signup.html">📝 Sign Up</a>
 
-
 </div>
+
 <footer style="margin-top:40px;color:#aaa;">
-<p>🤖 AI Boss © 2026</p>
-<p>Created by Abdul Haq</p>
+  <p>🤖 AI Boss © 2026</p>
+  <p>Created by Abdul Haq</p>
 </footer>
-<script
+
+
+<script>
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("service-worker.js")
+    .then(() => console.log("Service Worker Registered"));
+}
+</script>
+
+
 </body>
 </html>
